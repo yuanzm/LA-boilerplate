@@ -11,9 +11,9 @@ module.exports = (grunt)->
           base: '.'
 
     clean: 
-      bin: ['bin']
+      bin: ['bin/css', 'bin/js']
       dist: ['dist']
-      assets: ['assets']
+      assets: ['bin/assets']
 
     browserify: 
       dev: 
@@ -42,11 +42,27 @@ module.exports = (grunt)->
         tasks: ['browserify', 'less']
 
     copy:
-      assets:
+      pages:
         expand: true
         cwd: 'src/pages'
         src: ['**/*.jpg', '**/*.png', '**/*.gif']
-        dest: 'assets/pages'
+        dest: 'bin/assets/pages'
+
+      lib:
+        expand: true
+        cwd: 'lib'
+        src: ['**/*.jpg', '**/*.png', '**/*.gif']
+        dest: 'bin/assets/lib'
+
+      buildAssets:
+        expand: true
+        cwd: 'bin/assets'
+        src: ['**/*.jpg', '**/*.png', '**/*.gif']
+        dest: 'dist/assets'
+
+      buildHtml:
+        files:
+          'dist/index.html': ['_index-dist.html']
 
     less:    
       dev:
@@ -56,12 +72,12 @@ module.exports = (grunt)->
     uglify:
       build:
         files:
-          'dist/main.min.js': ['lib/bundle.min.js', 'lib/core/LA.min.js', 'bin/js/main.js']
+          'dist/js/main.min.js': ['lib/bundle.min.js', 'lib/core/LA.min.js', 'bin/js/main.js']
 
     cssmin:    
       build:
         files:
-          'dist/style.min.css': ['bin/css/style.css', 'lib/core/LA.min.css']
+          'dist/css/style.min.css': ['bin/css/style.css', 'lib/core/LA.min.css']
 
   grunt.loadNpmTasks 'grunt-contrib-connect'
   grunt.loadNpmTasks 'grunt-contrib-clean'
@@ -84,14 +100,21 @@ module.exports = (grunt)->
   grunt.registerTask 'assets', ->
     grunt.task.run [
       'clean:assets'
-      'copy'
+      'copy:pages'
+      'copy:lib'
     ]
 
   grunt.registerTask 'build', [
     'clean:bin'
     'clean:dist'
+    'copy:buildAssets'
+    'copy:buildHtml'
     'browserify' 
     'less' 
     'uglify'
     'cssmin'
+  ]
+
+  grunt.registerTask 'clear', [
+    'clean'
   ]
