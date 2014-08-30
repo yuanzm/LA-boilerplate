@@ -11,7 +11,7 @@ module.exports = (grunt)->
           base: '.'
 
     clean: 
-      bin: ['bin/css', 'bin/js']
+      bin: ['bin']
       dist: ['dist']
       assets: ['bin/assets']
 
@@ -96,6 +96,8 @@ module.exports = (grunt)->
       'clean:bin'
       'browserify'
       'less'
+      'copy:pages'
+      'copy:lib'
       'watch'
     ]
 
