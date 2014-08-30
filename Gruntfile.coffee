@@ -36,7 +36,9 @@ module.exports = (grunt)->
           'src/**/*.coffee', 
           'src/**/*.less', 
           'src/**/*.html', 
-          'index.html'
+          'lib/**/*.coffee',
+          'lib/**/*.less',
+          'index.html',
           'index-dev.html'
         ]
         tasks: ['browserify', 'less']
