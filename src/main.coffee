@@ -6,12 +6,17 @@ Slide = require "../lib/slides/fancy-slide/fancy-slide.coffee"
 SamplePage = require "./pages/sample/sample.coffee"
 
 # url config 
-pagesUrl = '../assets/pages'
 libUrl = '../assets/lib'
+
+keys = $("#main-script")[0].src.split("/")
+keys.pop()
+keys.push('../assets/pages')
+pagesUrl = keys.join "/"
 
 LA.set 'pagesUrl', pagesUrl
 LA.set 'libUrl', libUrl
 
+console.log pagesUrl
 pages = [{}, {}, {}]
 
 initApp = ->
