@@ -2,17 +2,14 @@ tpl = require "./guide.html"
 
 class GuidePage extends LA.PageController
     constructor: (data)->
-        @tipTl = new TimelineMax
         @$dom.append $(tpl)
         @$tip = @$dom.find "div.swipe-tip"
-        @tipTl.to @$tip, 1, {autoAlpha: 1, y: -20, repeat: -1, yoyo: true}
         @stop()
     start: -> 
-        @tipTl.restart()
+        @$tip.show()
 
     stop: ->
-        @tipTl.kill()
-        @_reset()
+        @$tip.hide()
 
     _reset: ->
         TweenMax.set @$tip, {autoAlpha: 0}

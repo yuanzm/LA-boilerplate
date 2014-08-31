@@ -12,4 +12,21 @@ div.swipe-tip {
     background: url("@{imgRoot}/swipe-tip.png");
     background-repeat: no-repeat;
     background-size: cover;
+    -webkit-animation: tipmove 1.5s infinite ease-in-out;
+}
+
+@-webkit-keyframes tipmove {
+  0% {
+    bottom: 10px;
+    opacity: 0;
+  }
+  50% {
+    bottom: 15px;
+    opacity: 1;
+  }
+  100% {
+    bottom: 20px;
+    opacity: 0
+  }
+
 }
