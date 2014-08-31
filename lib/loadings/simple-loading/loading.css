@@ -8,6 +8,7 @@
   /*margin-left: -150px;*/
   z-index: 1000000;
   background: transparent;
+  -webkit-transition: all 1s ease-in-out;
 }
 .preload-juggle {
   width: 300px;
