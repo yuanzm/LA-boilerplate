@@ -16,7 +16,6 @@ pagesUrl = keys.join "/"
 LA.set 'pagesUrl', pagesUrl
 LA.set 'libUrl', libUrl
 
-console.log pagesUrl
 pages = [{}, {}, {}]
 
 initApp = ->
