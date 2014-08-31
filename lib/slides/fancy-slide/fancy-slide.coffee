@@ -24,6 +24,7 @@ class FancySlide extends LA.SlideController
         @nextState = {y: HEIGHT, ease: @ease}
         @duration = 1
         @isAnimating = no
+        @isFast = no
     initStates: (prevState, currState, nextState)->
         if prevState then @prevState = prevState
         if currState then @currState = currState
@@ -55,6 +56,10 @@ class FancySlide extends LA.SlideController
         @$progress.hide()
     setDuration: (duration)->
         @duration = duration or @duration
+    fast: ->
+        @isFast = yes
+    unfast: ->
+        @isFast = no
     _makePageCurrent: (page)->
         prev = @_getPrevByIndex page.pageIndex
         next = @_getNextByIndex page.pageIndex
@@ -128,6 +133,7 @@ class FancySlide extends LA.SlideController
             if dist > GAP or v > 1
                 isRun = yes
                 duration = (1 - currentProgress) * @duration
+                if @isFast and v > 2 then duration = 0.15
                 @_enableAnimation duration
                 timeline.progress 100
             else
