@@ -1,16 +1,3 @@
-<!doctype html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-
-    <link rel="stylesheet" type="text/css" href="lib/core/LA.min.css">
-    <link rel="stylesheet" type="text/css" href="bin/css/style.css">
-</head>
-<body>
-
-<!-- loading -->
-<style>
 #loading-wrapper {
   width: 100%;
   height: 100%;
@@ -83,27 +70,3 @@
     -webkit-transform: translateX(0px) translateY(0px);
   }
 }
-</style>
-<div id="loading-wrapper">
-  <div class='preload-juggle' id='loading'>
-    <div class='ball'></div>
-    <div class='ball'></div>
-    <div class='ball'></div>
-  </div>
-</div>
-<script>
-window.onload = function () {
-  TweenMax.to('#loading-wrapper', 1, {opacity:0, display:'none', onComplete: startPage, ease: Power3.easeOut});
-  function startPage () {
-    LA.core.start()
-  }
-};
-</script>
-<!-- /loading -->
-
-    <script src="//localhost:35729/livereload.js"></script>
-    <script src="lib/bundle.min.js"></script>
-    <script src="lib/core/LA.min.js"></script>
-    <script src="bin/js/main.js"></script>
-</body>
-</html>  

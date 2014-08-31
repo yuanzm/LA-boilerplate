@@ -13,7 +13,6 @@ module.exports = (grunt)->
     clean: 
       bin: ['bin']
       dist: ['dist']
-      assets: ['bin/assets']
 
     browserify: 
       dev: 
@@ -38,8 +37,11 @@ module.exports = (grunt)->
           'src/**/*.html', 
           'lib/**/*.coffee',
           'lib/**/*.less',
-          'index.html',
-          'index-dev.html'
+          'lib/**/*.js',
+          'lib/**/*.css',
+          'lib/**/*.html',
+          'fixtures/index.html',
+          'fixtures/index-dist.html'
         ]
         tasks: ['browserify', 'less']
 
@@ -81,6 +83,16 @@ module.exports = (grunt)->
         files:
           'dist/css/style.min.css': ['bin/css/style.css', 'lib/core/LA.min.css']
 
+    inline: 
+      dev:
+        src: ['fixtures/index.html']
+        dest: ['index.html']
+
+      build:
+        src: ['fixtures/index-dist.html']
+        dest: ['dist/index.html']
+
+
   grunt.loadNpmTasks 'grunt-contrib-connect'
   grunt.loadNpmTasks 'grunt-contrib-clean'
   grunt.loadNpmTasks 'grunt-browserify'
@@ -89,6 +101,7 @@ module.exports = (grunt)->
   grunt.loadNpmTasks 'grunt-contrib-uglify'
   grunt.loadNpmTasks 'grunt-contrib-cssmin'
   grunt.loadNpmTasks 'grunt-contrib-copy'
+  grunt.loadNpmTasks 'grunt-inline'
 
   grunt.registerTask 'default', ->
     grunt.task.run [
@@ -96,23 +109,16 @@ module.exports = (grunt)->
       'clean:bin'
       'browserify'
       'less'
+      'inline:dev'
       'copy:pages'
       'copy:lib'
       'watch'
     ]
 
-  grunt.registerTask 'assets', ->
-    grunt.task.run [
-      'clean:assets'
-      'copy:pages'
-      'copy:lib'
-    ]
-
   grunt.registerTask 'build', [
-    'clean:bin'
     'clean:dist'
+    'inline:build'
     'copy:buildAssets'
-    'copy:buildHtml'
     'browserify' 
     'less' 
     'uglify'
