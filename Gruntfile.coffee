@@ -12,7 +12,9 @@ module.exports = (grunt)->
 
     clean: 
       bin: ['bin']
+      assets: ['assets/lib', 'assets/pages']
       dist: ['dist']
+      html: ['index.html']
 
     browserify: 
       dev: 
@@ -23,7 +25,7 @@ module.exports = (grunt)->
         expand: true
         flatten: true
         src: ['src/main.coffee']
-        dest: 'bin/js'
+        dest: 'bin'
         ext: '.js'
 
     watch:
@@ -43,45 +45,41 @@ module.exports = (grunt)->
           'fixtures/index.html',
           'fixtures/index-dist.html'
         ]
-        tasks: ['browserify', 'less']
+        tasks: ['browserify', 'less', 'inline:dev', 'copy:pages', 'copy:lib']
 
     copy:
       pages:
         expand: true
         cwd: 'src/pages'
         src: ['**/*.jpg', '**/*.png', '**/*.gif']
-        dest: 'bin/assets/pages'
+        dest: 'assets/pages'
 
       lib:
         expand: true
         cwd: 'lib'
         src: ['**/*.jpg', '**/*.png', '**/*.gif']
-        dest: 'bin/assets/lib'
+        dest: 'assets/lib'
 
       buildAssets:
         expand: true
-        cwd: 'bin/assets'
+        cwd: 'assets'
         src: ['**/*.jpg', '**/*.png', '**/*.gif']
         dest: 'dist/assets'
-
-      buildHtml:
-        files:
-          'dist/index.html': ['_index-dist.html']
 
     less:    
       dev:
         files:
-          'bin/css/style.css': ['src/**/*.less']
+          'bin/style.css': ['src/**/*.less']
 
     uglify:
       build:
         files:
-          'dist/js/main.min.js': ['lib/bundle.min.js', 'lib/core/LA.min.js', 'bin/js/main.js']
+          'dist/js/main.min.js': ['lib/bundle.min.js', 'lib/core/LA.min.js', 'bin/main.js']
 
     cssmin:    
       build:
         files:
-          'dist/css/style.min.css': ['bin/css/style.css', 'lib/core/LA.min.css']
+          'dist/css/style.min.css': ['bin/style.css', 'lib/core/LA.min.css']
 
     inline: 
       dev:
