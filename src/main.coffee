@@ -2,7 +2,7 @@
 core = LA.core
 
 # require module setting
-Slide = require "../lib/slides/fancy-slide/fancy-slide.coffee"
+Slide = require "../lib/slides/easy-slide/easy-slide.coffee"
 SamplePage = require "./pages/sample/sample.coffee"
 
 # url config 
@@ -16,7 +16,7 @@ pagesUrl = keys.join "/"
 LA.set 'pagesUrl', pagesUrl
 LA.set 'libUrl', libUrl
 
-pages = [{}, {}, {}]
+pages = [{}, {}, {}, {}, {}]
 
 initApp = ->
   for page in pages
