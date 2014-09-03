@@ -45,7 +45,7 @@ module.exports = (grunt)->
           'fixtures/index.html',
           'fixtures/index-dist.html'
         ]
-        tasks: ['browserify', 'less', 'inline:dev', 'copy:pages', 'copy:lib']
+        tasks: ['clean:assets', 'clean:bin', 'browserify', 'less', 'inline:dev', 'copy:pages', 'copy:lib']
 
     copy:
       pages:
