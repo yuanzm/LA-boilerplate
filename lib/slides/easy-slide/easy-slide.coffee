@@ -1,7 +1,7 @@
 gestureEvent = require "./gesture-event.coffee"
 HEIGHT = document.documentElement.clientHeight
 WIDTH = document.documentElement.clientWidth
-GAP = 0.3 * HEIGHT
+GAP = 50
 MAX_GAP = HEIGHT * 0.8
 
 css = ($dom, style)->
