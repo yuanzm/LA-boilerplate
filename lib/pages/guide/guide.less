@@ -1,0 +1,32 @@
+@imgRoot: "@{libUrl}/pages/guide/assets/images";
+
+div.swipe-tip {
+    position: absolute;
+    width: 16px;
+    height: 12px;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    bottom: 10px;
+    background: url("@{imgRoot}/swipe-tip.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    -webkit-animation: tipmove 1.5s infinite ease-in-out;
+    z-index: 100;
+}
+
+@-webkit-keyframes tipmove {
+  0% {
+    bottom: 10px;
+    opacity: 0;
+  }
+  50% {
+    bottom: 15px;
+    opacity: 1;
+  }
+  100% {
+    bottom: 20px;
+    opacity: 0
+  }
+
+}
